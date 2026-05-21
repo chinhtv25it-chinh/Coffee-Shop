@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="quanlibancoffee.client.controller.RegisterController">
+
+    <left>
+        <StackPane prefWidth="420">
+            <ImageView fitWidth="700" fitHeight="600" preserveRatio="false">
+                <image>
+                    <Image url="@../image/coffee.jpg" />
+                </image>
+            </ImageView>
+
+        </StackPane>
+    </left>
+
+    <center>
+        <VBox alignment="CENTER" spacing="18" style="-fx-padding: 50; -fx-background-color: #FAF0E6;">
+
+            <Label text="TÀI KHOẢN"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold;"/>
+
+            <VBox maxWidth="320" spacing="12">
+                <Label text="Tên đăng nhập" />
+                <TextField fx:id="txtUsername" prefHeight="35" promptText="Nhập tên đăng nhập" />
+
+                <Label text="Email" />
+                <TextField fx:id="txtEmail" prefHeight="35" promptText="Nhập email" />
+
+                <Label text="Mật khẩu" />
+                <PasswordField fx:id="txtPassword" prefHeight="35" promptText="Nhập mật khẩu" />
+            </VBox>
+
+            <Label fx:id="lblMessage" style="-fx-text-fill: red;"/>
+
+            <Button text="ĐĂNG KÝ"
+                    prefWidth="320"
+                    prefHeight="45"
+                    onAction="#handleRegister"
+                    style="-fx-background-color: #6F4E37;
+                           -fx-text-fill: white;
+                           -fx-font-size: 15px;
+                           -fx-font-weight: bold;"/>
+
+            <Hyperlink text="Đã có tài khoản? Đăng nhập"
+                       onAction="#goLogin"/>
+        </VBox>
+    </center>
+
+</BorderPane>

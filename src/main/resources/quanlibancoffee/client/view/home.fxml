@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="quanlibancoffee.client.controller.HomeController" prefHeight="700" prefWidth="1200">
+
+    <left>
+        <VBox prefWidth="270" spacing="20" style="-fx-background-color: #6F4E37; -fx-padding: 0;">
+            <children>
+                <VBox alignment="CENTER" prefHeight="140" style="-fx-background-color: #5D4037;">
+                    <Label text="☕ COFFEE SHOP" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+                    <Label text="Hệ thống quản lý" style="-fx-text-fill: #D7CCC8; -fx-font-size: 10px;" />
+                </VBox>
+
+                <Region prefHeight="20" />
+
+                <Button onAction="#showTrangChu" prefHeight="55" prefWidth="150" text="  🏠  Trang chủ"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 0 0 0 30; -fx-font-size: 15px; -fx-cursor: hand;"/>
+
+                <Button onAction="#showBanHang" prefHeight="55" prefWidth="150" text="  ☕  Bán hàng"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 0 0 0 30; -fx-font-size: 15px; -fx-cursor: hand;"/>
+
+                <Button onAction="#showSanPham" prefHeight="55" prefWidth="150" text="  📋  Sản Phẩm"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 0 0 0 30; -fx-font-size: 15px; -fx-cursor: hand;"/>
+
+                <Button onAction="#showThongKe" prefHeight="55" prefWidth="150" text="  📊  Thống kê"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 0 0 0 30; -fx-font-size: 15px; -fx-cursor: hand;"/>
+
+                <Region VBox.vgrow="ALWAYS" />
+
+                <Button onAction="#logout" prefHeight="55" prefWidth="300" text="  🚪  Đăng xuất"
+                        style="-fx-background-color: #5D4037; -fx-text-fill: #FFEBEE; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 0;"/>
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane fx:id="contentArea" style="-fx-background-color: #F5F5F5;" />
+    </center>
+</BorderPane>

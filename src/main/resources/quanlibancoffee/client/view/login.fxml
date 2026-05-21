@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane styleClass="anh1.jpg" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlibancoffee.client.controller.LoginController">
+
+    <!-- LEFT IMAGE -->
+    <left>
+        <StackPane prefWidth="420">
+            <ImageView fitHeight="600" fitWidth="700" preserveRatio="false">
+                <image>
+                    <Image url="@../image/coffee.jpg" />
+                </image>
+            </ImageView>
+
+        </StackPane>
+    </left>
+
+    <!-- RIGHT FORM -->
+    <center>
+       <VBox alignment="CENTER" spacing="18" style="-fx-padding: 50; -fx-background-color: #FAF0E6;">
+
+           <Label style="-fx-font-size: 28px; -fx-text-fill: black; -fx-font-weight: bold;" text="COFFEE SHOP" />
+           <Label text="Quản lý dễ dàng – Bán hàng hiệu quả" />
+
+            <VBox maxWidth="320" spacing="20">
+                <Label text="Tài khoản" />
+                <TextField fx:id="txtUsername" prefHeight="40" promptText="Nhập tên tài khoản hoặc email" />
+                <Label text="Mật khẩu" />
+                <StackPane>
+                    <PasswordField fx:id="txtPassword" prefHeight="40.0" prefWidth="320.0" promptText="Nhập mật khẩu">
+                  <effect>
+                     <Blend />
+                  </effect></PasswordField>
+                    <TextField fx:id="txtPasswordVisible" managed="false" prefHeight="40" promptText="Nhập mật khẩu" visible="false" />
+                </StackPane>
+
+                <CheckBox fx:id="chkShowPassword" onAction="#togglePassword" text="Hiển thị mật khẩu" />
+
+            </VBox>
+
+            <Label fx:id="lblMessage" style="-fx-text-fill: red;" />
+
+            <Button onAction="#handleLogin" prefHeight="45" prefWidth="320" style="-fx-background-color: #6F4E37;-fx-text-fill: white;-fx-font-size: 15px;-fx-font-weight: bold;-fx-background-radius: 8;" text="ĐĂNG NHẬP" />
+
+            <Hyperlink onAction="#goRegister" text="Chưa có tài khoản? Đăng ký" />
+        </VBox>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox spacing="25" style="-fx-padding: 30; -fx-background-color: #F8F9FA;"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="quanlibancoffee.client.controller.TrangChuController">
+    <children>
+        <HBox alignment="CENTER_LEFT" style="-fx-margin-bottom: 10;">
+            <VBox spacing="5">
+                <Label text="BẢNG ĐIỀU KHIỂN" style="-fx-font-size: 24px; -fx-font-weight: 900; -fx-text-fill: #2C3E50; -fx-font-family: 'Segoe UI';" />
+                <Label text="Thống kê hoạt động kinh doanh trong ngày hôm nay" style="-fx-font-size: 13px; -fx-text-fill: #7F8C8D;" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button onAction="#refreshDashboard" text="🔄  Làm mới dữ liệu"
+                    style="-fx-background-color: #FFFFFF; -fx-text-fill: #2C3E50; -fx-font-weight: bold; -fx-padding: 10 20 10 20; -fx-background-radius: 20; -fx-border-color: #BDC3C7; -fx-border-radius: 20; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 2);" />
+        </HBox>
+
+        <HBox spacing="20">
+            <VBox HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                  style="-fx-background-color: linear-gradient(to right, #00B4DB, #0083B0); -fx-padding: 22; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,131,176,0.25), 15, 0, 0, 8);">
+                <Label text="💰  DOANH THU HÔM NAY" textFill="WHITE" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-opacity: 0.9;" />
+                <Label fx:id="lblTodayRevenue" text="0đ" textFill="WHITE" style="-fx-font-size: 28px; -fx-font-weight: 900; -fx-padding: 10 0 0 0;" />
+            </VBox>
+
+            <VBox HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                  style="-fx-background-color: linear-gradient(to right, #4e54c8, #8f94fb); -fx-padding: 22; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(78,84,200,0.25), 15, 0, 0, 8);">
+                <Label text="🛒  ĐƠN HÀNG HÔM NAY" textFill="WHITE" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-opacity: 0.9;" />
+                <Label fx:id="lblTodayOrders" text="0" textFill="WHITE" style="-fx-font-size: 28px; -fx-font-weight: 900; -fx-padding: 10 0 0 0;" />
+            </VBox>
+
+            <VBox HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                  style="-fx-background-color: linear-gradient(to right, #f857a6, #ff5858); -fx-padding: 22; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(248,87,166,0.25), 15, 0, 0, 8);">
+                <Label text="🔥  MÓN CHẠY NHẤT" textFill="WHITE" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-opacity: 0.9;" />
+                <Label fx:id="lblTopProduct" text="CHƯA BÁN ĐƯỢC" textFill="WHITE" style="-fx-font-size: 20px; -fx-font-weight: 900; -fx-padding: 15 0 0 0;" />
+            </VBox>
+        </HBox>
+
+        <VBox spacing="15" VBox.vgrow="ALWAYS"
+              style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 10, 0, 0, 5);">
+            <Label text="⚡  ĐƠN HÀNG VỪA THỰC HIỆN (MỚI NHẤT)" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #34495E;" />
+
+            <TableView fx:id="tableRecentOrders" VBox.vgrow="ALWAYS"
+                       style="-fx-background-color: transparent; -fx-background-radius: 10; -fx-overflow-x: hidden; -fx-border-color: #EBF0F5; -fx-border-radius: 10;">
+                <columns>
+                    <TableColumn fx:id="colTime" prefWidth="250" text="Thời gian đặt"
+                                 style="-fx-alignment: CENTER; -fx-font-size: 13px;" />
+                    <TableColumn fx:id="colTotal" prefWidth="300" text="Tổng tiền thanh toán"
+                                 style="-fx-alignment: CENTER-RIGHT; -fx-font-weight: bold; -fx-text-fill: #2E7D32; -fx-font-size: 13px;" />
+                    <TableColumn fx:id="colMethod" prefWidth="250" text="Phương thức thanh toán"
+                                 style="-fx-alignment: CENTER; -fx-font-size: 13px;" />
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                </columnResizePolicy>
+            </TableView>
+        </VBox>
+    </children>
+</VBox>

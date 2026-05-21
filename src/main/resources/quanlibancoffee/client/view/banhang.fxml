@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox spacing="15" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlibancoffee.client.controller.BanHangController">
+    <padding>
+        <Insets top="15" bottom="15" left="15" right="15" />
+    </padding>
+
+    <children>
+        <VBox prefWidth="330.0" spacing="15" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+            <Label text="📍 SƠ ĐỒ BÀN" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #6F4E37;" />
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent; -fx-background: transparent;">
+                <FlowPane fx:id="flowTables" hgap="15" vgap="15" />
+            </ScrollPane>
+            <Separator />
+            <VBox spacing="5">
+                <Label text="Đang chọn:" style="-fx-font-size: 12px; -fx-text-fill: #888;" />
+                <Label fx:id="lblSelectedTable" text="Chưa chọn bàn" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #d32f2f;" />
+            </VBox>
+        </VBox>
+
+        <VBox spacing="15" HBox.hgrow="ALWAYS" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="☕ MENU MÓN" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #6F4E37;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <TextField fx:id="txtChoice" promptText="Tìm tên món ăn..." prefWidth="250"
+                           style="-fx-background-radius: 20; -fx-padding: 8 15; -fx-border-color: #6F4E37; -fx-border-radius: 20;" />
+            </HBox>
+
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent; -fx-background: transparent;">
+                <VBox spacing="25">
+                    <padding>
+                        <Insets top="10" bottom="10" left="10" right="10" />
+                    </padding>
+                    <VBox spacing="10">
+                        <Label text="CÀ PHÊ" style="-fx-font-weight: bold; -fx-text-fill: #A0522D; -fx-border-color: #A0522D; -fx-border-width: 0 0 2 0;" />
+                        <FlowPane fx:id="flowCoffee" hgap="20" vgap="20" prefWrapLength="600" />
+                    </VBox>
+
+                    <VBox spacing="10">
+                        <Label text="TRÀ &amp; TRÀ SỮA" style="-fx-font-weight: bold; -fx-text-fill: #2E8B57; -fx-border-color: #2E8B57; -fx-border-width: 0 0 2 0;" />
+                        <FlowPane fx:id="flowTea" hgap="15" vgap="15" />
+                    </VBox>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+
+        <VBox prefWidth="380.0" spacing="15" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+            <Label text="🛒 Đã Chọn Món" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+
+            <TableView fx:id="tableOrder" VBox.vgrow="ALWAYS" style="-fx-background-radius: 10;">
+                <columns>
+                    <TableColumn fx:id="colOrderName" prefWidth="160" text="Tên món" />
+                    <TableColumn fx:id="colOrderQty" prefWidth="60" text="SL" />
+                    <TableColumn fx:id="colOrderPrice" prefWidth="120" text="Thành tiền" />
+                </columns>
+            </TableView>
+
+            <VBox spacing="10" style="-fx-background-color: #FAFAFA; -fx-padding: 15; -fx-background-radius: 10;">
+                <HBox alignment="CENTER_RIGHT" spacing="10">
+                    <Label text="TỔNG CỘNG:" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                    <Label fx:id="lblTotal" text="0 đ" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #d32f2f;" />
+                </HBox>
+
+                <Button maxWidth="Infinity" onAction="#handleCheckOut" prefHeight="50.0" text="XÁC NHẬN THANH TOÁN"
+                        style="-fx-background-color: #6F4E37; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10; -fx-cursor: hand;" />
+                <Button maxWidth="Infinity" onAction="#handleClear" text="Hủy đơn"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e74c3c; -fx-border-color: #e74c3c; -fx-border-radius: 10; -fx-cursor: hand;" />
+            </VBox>
+        </VBox>
+    </children>
+</HBox>

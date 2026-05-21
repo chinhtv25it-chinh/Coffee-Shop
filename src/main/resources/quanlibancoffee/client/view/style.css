@@ -1,0 +1,102 @@
+/* Tông màu: #4E342E (Nâu đậm), #D4A373 (Vàng gỗ), #FAFAF5 (Trắng kem) */
+.root {
+    -fx-font-family: "Segoe UI", Tahoma, sans-serif;
+    -fx-background-color: #FAFAF5;
+}
+
+/* Nút bấm bo góc hiện đại */
+.button {
+    -fx-background-color: #4E342E;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #D4A373;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Kiểu dáng cho các ô chứa Bàn (Table Card) */
+.table-card {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-border-color: #E0E0E0;
+    -fx-border-radius: 15;
+    -fx-padding: 15;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+.table-card-busy {
+    -fx-background-color: #FFEBEE; /* Màu đỏ nhạt khi có khách */
+    -fx-border-color: #EF5350;
+}
+
+.table-card-free {
+    -fx-background-color: #E8F5E9; /* Màu xanh nhạt khi trống */
+    -fx-border-color: #66BB6A;
+}
+/* Container chung */
+.container-card {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);
+}
+
+/* 1. Màu bàn xanh đậm hơn và chuyên nghiệp */
+.table-item {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 4);
+    -fx-transition: all 0.3s ease;
+}
+
+/* Bàn trống: Xanh đậm Forest Green */
+.table-empty {
+    -fx-border-color: #1B5E20; /* Viền xanh đậm */
+    -fx-background-color: #E8F5E9; /* Nền xanh cực nhẹ để làm nổi chữ */
+}
+.table-empty .label {
+    -fx-text-fill: #1B5E20; /* Chữ xanh đậm cho đồng bộ */
+}
+
+/* Bàn có khách: Màu đỏ đô/nâu đậm để dễ phân biệt */
+.table-occupied {
+    -fx-border-color: #B71C1C;
+    -fx-background-color: #FFEBEE;
+}
+.table-occupied .label {
+    -fx-text-fill: #B71C1C;
+}
+
+/* 2. Style cho Card sản phẩm (Menu) */
+.product-card {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 15, 0, 0, 5);
+}
+
+.product-card:hover {
+    -fx-background-color: #FDF5E6; /* Màu kem nhẹ khi di chuột vào */
+    -fx-translate-y: -5; /* Hiệu ứng bay lên nhẹ */
+}
+
+/* Nút thanh toán */
+.btn-pay {
+    -fx-background-color: #4E342E;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-background-radius: 10;
+}
+
+.btn-pay:hover {
+    -fx-background-color: #3E2723;
+}
