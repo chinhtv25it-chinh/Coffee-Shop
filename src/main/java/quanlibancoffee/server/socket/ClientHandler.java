@@ -58,7 +58,24 @@ public class ClientHandler implements Runnable {
                         writer.println("UPDATE_SUCCESS");
                         break;
 
-                    // Bạn có thể viết thêm các case chức năng khác tại đây (ví dụ: LOGIN, GET_PRODUCTS...)
+                    case "LOGIN":
+                        // Cú pháp lệnh client gửi lên: LOGIN;username;password
+                        if (tokens.length >= 3) {
+                            String username = tokens[1];
+                            String password = tokens[2];
+
+                            // Gọi DAO kiểm tra Database
+                            boolean isValid = quanlibancoffee.server.dao.UserDAO.checkLogin(username, password);
+
+                            if (isValid) {
+                                writer.println("LOGIN_SUCCESS"); // Trả về cho client biết là trúng rồi
+                            } else {
+                                writer.println("LOGIN_FAIL;Sai tài khoản hoặc mật khẩu!");
+                            }
+                        } else {
+                            writer.println("LOGIN_FAIL;Thiếu tham số đăng nhập!");
+                        }
+                        break;
 
                     default:
                         writer.println("ERROR;Lệnh không hợp lệ");

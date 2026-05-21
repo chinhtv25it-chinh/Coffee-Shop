@@ -25,35 +25,39 @@ public class LoginController {
         String password = txtPassword.getText().trim();
 
         if (loginInput.isEmpty() || password.isEmpty()) {
+            lblMessage.setStyle("-fx-text-fill: red;");
             lblMessage.setText("❌ Vui lòng nhập đầy đủ thông tin!");
             return;
         }
 
-        // TẠM THỜI: Giữ kết nối DB trực tiếp để bạn test giao diện không bị lỗi
-        // (Sau này BẮT BUỘC phải chuyển phần này sang cho Server xử lý nhé!)
-        String sql = "SELECT * FROM users WHERE (username = ? OR email = ?) AND password = ?";
+        // 1. Đóng gói dữ liệu thành chuỗi theo định dạng Server quy định
+        String requestStr = "LOGIN;" + loginInput + ";" + password;
 
-        try (Connection con = quanlibancoffee.server.utils.Database.connectDB();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+        try {
+            // 2. Bắn chuỗi này qua Socket Server thông qua ClientService
+            String responseStr = quanlibancoffee.client.service.ClientService.sendRequest(requestStr);
 
-            ps.setString(1, loginInput);
-            ps.setString(2, loginInput);
-            ps.setString(3, password);
-
-            java.sql.ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            // 3. Xử lý kết quả phản hồi từ Server trả về
+            if ("LOGIN_SUCCESS".equals(responseStr)) {
                 lblMessage.setStyle("-fx-text-fill: green;");
                 lblMessage.setText("✔ Đăng nhập thành công!");
 
-                // ĐÃ SỬA: Bỏ chữ /image/ ở đường dẫn fxml (Hãy đổi thành trangchu.fxml nếu file thực tế tên thế)
+                // Chuyển sang màn hình chính (bỏ chữ /image/ đi như mình sửa lúc trước nhé)
                 switchScene("/quanlibancoffee/client/view/home.fxml", "Trang chủ - Coffee POS");
+
+            } else if (responseStr != null && responseStr.startsWith("LOGIN_FAIL")) {
+                String[] tokens = responseStr.split(";");
+                String errorMsg = tokens.length > 1 ? tokens[1] : "Sai tài khoản hoặc mật khẩu!";
+                lblMessage.setStyle("-fx-text-fill: red;");
+                lblMessage.setText("❌ " + errorMsg);
             } else {
                 lblMessage.setStyle("-fx-text-fill: red;");
-                lblMessage.setText("❌ Sai tài khoản hoặc mật khẩu!");
+                lblMessage.setText("❌ Lỗi hệ thống: " + responseStr);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            lblMessage.setText("❌ Lỗi kết nối Database!");
+            lblMessage.setStyle("-fx-text-fill: red;");
+            lblMessage.setText("❌ Lỗi kết nối đến Server!");
         }
     }
 
