@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.Socket;
 
 public class ClientService {
-    private static final String HOST = "localhost"; // Nếu chạy cùng máy, hoặc đổi thành IP máy server
+    private static final String HOST = "localhost";
     private static final int PORT = 8888;
 
     private static Socket socket;

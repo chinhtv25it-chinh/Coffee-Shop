@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="quanlibancoffee.client.controller.TaiKhoanController" prefHeight="600" prefWidth="900" style="-fx-background-color: #FAF0E6;">
+    <children>
+        <Label layoutX="30.0" layoutY="20.0" text="👥 QUẢN LÝ TÀI KHOẢN NHÂN VIÊN" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #5D4037;" />
+
+        <TableView fx:id="tableUsers" layoutX="30.0" layoutY="70.0" prefHeight="480.0" prefWidth="500.0">
+            <columns>
+                <TableColumn fx:id="colUsername" prefWidth="150.0" text="Tên tài khoản" />
+                <TableColumn fx:id="colEmail" prefWidth="200.0" text="Email" />
+                <TableColumn fx:id="colRole" prefWidth="145.0" text="Vai trò (Quyền)" />
+            </columns>
+        </TableView>
+
+        <VBox layoutX="560.0" layoutY="70.0" prefWidth="310.0" spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+            <children>
+                <Label text="Thông tin tài khoản" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #6F4E37;" />
+
+                <Label text="Tên tài khoản:" />
+                <TextField fx:id="txtUsername" promptText="Nhập tên đăng nhập" />
+
+                <Label text="Email:" />
+                <TextField fx:id="txtEmail" promptText="Nhập địa chỉ email" />
+
+                <Label text="Mật khẩu (Chỉ dùng khi thêm mới):" />
+                <PasswordField fx:id="txtPassword" promptText="Nhập mật khẩu" />
+
+                <Label text="Vai trò quyền:" />
+                <ComboBox fx:id="cbRole" prefWidth="270.0">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Admin" />
+                            <String fx:value="User" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <Label fx:id="lblStatus" style="-fx-text-fill: red;" />
+
+                <HBox spacing="10" alignment="CENTER">
+                    <children>
+                        <Button onAction="#handleAdd" text="➕ Thêm" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-cursor: hand;" prefWidth="80"/>
+                        <Button onAction="#handleUpdate" text="🔧 Sửa" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-cursor: hand;" prefWidth="80"/>
+                        <Button onAction="#handleDelete" text="❌ Xóa" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: hand;" prefWidth="80"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

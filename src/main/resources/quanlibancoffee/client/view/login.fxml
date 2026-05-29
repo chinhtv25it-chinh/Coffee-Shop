@@ -5,48 +5,63 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane styleClass="anh1.jpg" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlibancoffee.client.controller.LoginController">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quanlibancoffee.client.controller.LoginController"
+            style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.12), 12, 0, 0, 6);">
 
-    <!-- LEFT IMAGE -->
     <left>
-        <StackPane prefWidth="420">
-            <ImageView fitHeight="600" fitWidth="700" preserveRatio="false">
+        <StackPane prefWidth="430">
+            <ImageView fitHeight="600" fitWidth="500" preserveRatio="false">
                 <image>
                     <Image url="@../image/coffee.jpg" />
                 </image>
             </ImageView>
-
         </StackPane>
     </left>
 
-    <!-- RIGHT FORM -->
     <center>
-       <VBox alignment="CENTER" spacing="18" style="-fx-padding: 50; -fx-background-color: #FAF0E6;">
+        <VBox alignment="CENTER" spacing="22" style="-fx-padding: 50; -fx-background-color: #FAF6F0;">
+            <children>
+                <VBox alignment="CENTER" spacing="5">
+                    <Label style="-fx-font-size: 30px; -fx-text-fill: #4E342E; -fx-font-weight: bold; -fx-letter-spacing: 1px;" text="COFFEE SHOP" />
+                    <Label text="Quản lý dễ dàng – Bán hàng hiệu quả" style="-fx-font-size: 13px; -fx-text-fill: #8D6E63; -fx-font-style: italic;" />
+                </VBox>
 
-           <Label style="-fx-font-size: 28px; -fx-text-fill: black; -fx-font-weight: bold;" text="COFFEE SHOP" />
-           <Label text="Quản lý dễ dàng – Bán hàng hiệu quả" />
+                <VBox maxWidth="320" spacing="15">
+                    <children>
+                        <VBox spacing="6">
+                            <Label text="Tài khoản" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #5D4037;" />
+                            <TextField fx:id="txtUsername" prefHeight="40" promptText="Nhập tên tài khoản hoặc email"
+                                       style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #E0D4C3; -fx-border-radius: 8; -fx-padding: 0 12 0 12;" />
+                        </VBox>
 
-            <VBox maxWidth="320" spacing="20">
-                <Label text="Tài khoản" />
-                <TextField fx:id="txtUsername" prefHeight="40" promptText="Nhập tên tài khoản hoặc email" />
-                <Label text="Mật khẩu" />
-                <StackPane>
-                    <PasswordField fx:id="txtPassword" prefHeight="40.0" prefWidth="320.0" promptText="Nhập mật khẩu">
-                  <effect>
-                     <Blend />
-                  </effect></PasswordField>
-                    <TextField fx:id="txtPasswordVisible" managed="false" prefHeight="40" promptText="Nhập mật khẩu" visible="false" />
-                </StackPane>
+                        <VBox spacing="6">
+                            <Label text="Mật khẩu" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #5D4037;" />
+                            <StackPane>
+                                <children>
+                                    <PasswordField fx:id="txtPassword" prefHeight="40.0" prefWidth="320.0" promptText="Nhập mật khẩu"
+                                                   style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #E0D4C3; -fx-border-radius: 8; -fx-padding: 0 12 0 12;" />
+                                    <TextField fx:id="txtPasswordVisible" managed="false" prefHeight="40" promptText="Nhập mật khẩu" visible="false"
+                                               style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #E0D4C3; -fx-border-radius: 8; -fx-padding: 0 12 0 12;" />
+                                </children>
+                            </StackPane>
+                        </VBox>
 
-                <CheckBox fx:id="chkShowPassword" onAction="#togglePassword" text="Hiển thị mật khẩu" />
+                        <CheckBox fx:id="chkShowPassword" onAction="#togglePassword" text="Hiển thị mật khẩu" style="-fx-text-fill: #705C53; -fx-font-size: 12px; -fx-cursor: hand;" />
+                    </children>
+                </VBox>
 
-            </VBox>
+                <Label fx:id="lblMessage" style="-fx-text-fill: #e74c3c; -fx-font-size: 12px;" />
 
-            <Label fx:id="lblMessage" style="-fx-text-fill: red;" />
+                <VBox spacing="12" alignment="CENTER">
+                    <children>
+                        <Button onAction="#handleLogin" prefHeight="45" prefWidth="320"
+                                style="-fx-background-color: #5D4037; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(93,64,55,0.25), 8, 0, 0, 3);"
+                                text="ĐĂNG NHẬP" />
 
-            <Button onAction="#handleLogin" prefHeight="45" prefWidth="320" style="-fx-background-color: #6F4E37;-fx-text-fill: white;-fx-font-size: 15px;-fx-font-weight: bold;-fx-background-radius: 8;" text="ĐĂNG NHẬP" />
-
-            <Hyperlink onAction="#goRegister" text="Chưa có tài khoản? Đăng ký" />
+                        <Hyperlink onAction="#goRegister" text="Chưa có tài khoản? Đăng ký ngay" style="-fx-text-fill: #007BFF; -fx-font-size: 13px; -fx-underline: false;" />
+                    </children>
+                </VBox>
+            </children>
         </VBox>
     </center>
 

@@ -21,10 +21,13 @@
                 <Button onAction="#showBanHang" prefHeight="55" prefWidth="150" text="  ☕  Bán hàng"
                         style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 0 0 0 30; -fx-font-size: 15px; -fx-cursor: hand;"/>
 
-                <Button onAction="#showSanPham" prefHeight="55" prefWidth="150" text="  📋  Sản Phẩm"
+                <Button fx:id="btnSanPham" onAction="#showSanPham" prefHeight="55" prefWidth="150" text="  📋  Sản Phẩm"
                         style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 0 0 0 30; -fx-font-size: 15px; -fx-cursor: hand;"/>
 
-                <Button onAction="#showThongKe" prefHeight="55" prefWidth="150" text="  📊  Thống kê"
+                <Button fx:id="btnThongKe" onAction="#showThongKe" prefHeight="55" prefWidth="150" text="  📊  Thống kê"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 0 0 0 30; -fx-font-size: 15px; -fx-cursor: hand;"/>
+
+                <Button fx:id="btnTaiKhoan" onAction="#showTaiKhoan" prefHeight="55" prefWidth="150" text="  👥  Tài khoản"
                         style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 0 0 0 30; -fx-font-size: 15px; -fx-cursor: hand;"/>
 
                 <Region VBox.vgrow="ALWAYS" />
