@@ -4,7 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -12,6 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import quanlibancoffee.shared.model.CoffeeTable;
 import quanlibancoffee.shared.model.Product;
@@ -64,13 +68,15 @@ public class BanHangController implements Initializable {
         initActionColumn();
         tableOrder.setItems(orderItems);
 
-        // Khởi tạo ngầm Phương thức thanh toán (Nếu FXML chưa có, ta tự định nghĩa hoặc liên kết @FXML)
+        // ĐÃ SỬA: Chỉ gộp nhóm ToggleGroup, TUYỆT ĐỐI không dùng 'new RadioButton'
         paymentGroup = new ToggleGroup();
-        radTienMat = new RadioButton("Tiền mặt");
-        radTienMat.setToggleGroup(paymentGroup);
-        radTienMat.setSelected(true); // Mặc định là tiền mặt
-        radChuyenKhoan = new RadioButton("Chuyển khoản");
-        radChuyenKhoan.setToggleGroup(paymentGroup);
+        if (radTienMat != null && radChuyenKhoan != null) {
+            radTienMat.setToggleGroup(paymentGroup);
+            radChuyenKhoan.setToggleGroup(paymentGroup);
+            radTienMat.setSelected(true); // Mặc định chọn tiền mặt lúc mở app
+        } else {
+            System.out.println("⚠️ Cảnh báo: Chưa liên kết radTienMat hoặc radChuyenKhoan với FXML!");
+        }
 
         // Nạp dữ liệu hoàn toàn qua mạng Socket
         loadTablesFromServer();
@@ -96,9 +102,11 @@ public class BanHangController implements Initializable {
                     private final HBox pane = new HBox(4, btnPlus, btnMinus, btnDelete);
 
                     {
-                        btnPlus.setStyle("-fx-background-color: #2ECC71; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 2 6 2 6;");
-                        btnMinus.setStyle("-fx-background-color: #F1C40F; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 2 8 2 8;");
-                        btnDelete.setStyle("-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 11px; -fx-padding: 2 5 2 5;");
+                        // ĐÃ SỬA: Gọi class CSS thay vì dùng .setStyle() inline
+                        btnPlus.getStyleClass().add("btn-plus");
+                        btnMinus.getStyleClass().add("btn-minus");
+                        btnDelete.getStyleClass().add("btn-delete");
+
                         pane.setAlignment(Pos.CENTER);
 
                         btnPlus.setOnAction(e -> {
@@ -151,14 +159,18 @@ public class BanHangController implements Initializable {
             return;
         }
         if (orderItems.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Cảnh appointments", "Đơn hàng đang trống! Vui lòng chọn món trước khi thanh toán.");
+            showAlert(Alert.AlertType.WARNING, "Cảnh báo", "Đơn hàng đang trống! Vui lòng chọn món trước khi thanh toán.");
             return;
         }
 
-        // Lấy phương thức thanh toán đang chọn
+
         String paymentMethod = "Tiền mặt";
-        if (radChuyenKhoan.isSelected()) {
-            paymentMethod = "Chuyển khoản";
+        if (paymentGroup.getSelectedToggle() != null) {
+            RadioButton selectedRadio = (RadioButton) paymentGroup.getSelectedToggle();
+            // Nếu nút đang chọn có chứa chữ "Chuyển khoản" hoặc "Banking"
+            if (selectedRadio.getText().contains("Chuyển khoản") || selectedRadio.getText().contains("Banking")) {
+                paymentMethod = "Chuyển khoản";
+            }
         }
 
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
@@ -169,7 +181,12 @@ public class BanHangController implements Initializable {
         final String finalPaymentMethod = paymentMethod;
         confirm.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                sendOrderToServer(finalPaymentMethod);
+                if ("Chuyển khoản".equals(finalPaymentMethod)) {
+                    double totalAmount = parsePrice(lblTotal.getText());
+                    hienThiPopupQR(totalAmount, selectedTable.getTableName());
+                } else {
+                    sendOrderToServer(finalPaymentMethod);
+                }
             }
         });
     }
@@ -222,7 +239,7 @@ public class BanHangController implements Initializable {
 
             String fileName = "Hóa Đơn_" + safeTableName + "_" + System.currentTimeMillis() + ".txt";
             File file = new File(fileName);
-             out = new PrintWriter(file);
+            out = new PrintWriter(file);
 
             out.println("=========================================");
             out.println("               COFFEE SHOP               ");
@@ -303,16 +320,21 @@ public class BanHangController implements Initializable {
         VBox tableCard = new VBox(5);
         tableCard.setAlignment(Pos.CENTER);
         tableCard.setPrefSize(100, 100);
+
+
+        tableCard.getStyleClass().add("table-item");
         if (t.getStatus().equals("Trống")) {
-            tableCard.setStyle("-fx-background-color: #2ECC71; -fx-background-radius: 10; -fx-cursor: hand;");
+            tableCard.getStyleClass().add("table-empty");
         } else {
-            tableCard.setStyle("-fx-background-color: #E74C3C; -fx-background-radius: 10; -fx-cursor: hand;");
+            tableCard.getStyleClass().add("table-occupied");
         }
 
         Label name = new Label(t.getTableName());
-        name.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: white;");
+        name.getStyleClass().add("table-title");
+
         Label status = new Label(t.getStatus());
-        status.setStyle("-fx-font-size: 11px; -fx-text-fill: white;");
+        status.getStyleClass().add("table-status");
+
         tableCard.getChildren().addAll(name, status);
 
         tableCard.setOnMouseClicked(e -> {
@@ -376,7 +398,9 @@ public class BanHangController implements Initializable {
         VBox card = new VBox(8);
         card.setAlignment(Pos.CENTER);
         card.setPrefWidth(140); card.setMinHeight(180);
-        card.setStyle("-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 3); -fx-cursor: hand;");
+
+        // ĐÃ SỬA: Đưa toàn bộ hiệu ứng đổ bóng, bo góc, đổi màu hover của Card Sản phẩm vào file CSS
+        card.getStyleClass().add("product-card");
 
         ImageView imageView = new ImageView();
         try {
@@ -386,11 +410,11 @@ public class BanHangController implements Initializable {
         imageView.setFitWidth(85); imageView.setFitHeight(85); imageView.setPreserveRatio(true);
 
         Label lblName = new Label(p.getName().toUpperCase());
-        lblName.setStyle("-fx-font-weight: bold; -fx-font-size: 11px; -fx-text-fill: #4E342E;");
+        lblName.getStyleClass().add("product-name"); // ĐÃ SỬA: Đưa font chữ, màu sắc chữ vào file CSS
         lblName.setWrapText(true); lblName.setAlignment(Pos.CENTER);
 
         Label lblPrice = new Label(String.format("%,.0f đ", p.getPrice()));
-        lblPrice.setStyle("-fx-text-fill: #E67E22; -fx-font-weight: bold; -fx-font-size: 11px;");
+        lblPrice.getStyleClass().add("product-price"); // ĐÃ SỬA: Đưa màu sắc và chữ đậm vào file CSS
 
         card.getChildren().addAll(imageView, lblName, lblPrice);
 
@@ -424,5 +448,60 @@ public class BanHangController implements Initializable {
 
     private void showAlert(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type); alert.setTitle(title); alert.setHeaderText(null); alert.setContentText(content); alert.showAndWait();
+    }
+
+    private void hienThiPopupQR(double executionAmount, String tableName) {
+        String bankId = "MB";
+        String accountNo = "0886795905";
+        String accountName = "TRAN VAN CHINH";
+
+        String safeTableName = (tableName != null) ? tableName.replaceAll("[^a-zA-Z0-9_\\s]", "").trim() : "Ban";
+        String addInfo = "Thanh%20Toan%20" + safeTableName.replace(" ", "%20");
+
+        String qrUrl = String.format("https://img.vietqr.io/image/%s-%s-qr_only.png?amount=%.0f&addInfo=%s&accountName=%s",
+                bankId, accountNo, executionAmount, addInfo, accountName.replace(" ", "%20"));
+
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.setTitle("QUÉT MÃ QR THANH TOÁN BANKING");
+        popupStage.setWidth(380);
+        popupStage.setHeight(480);
+        popupStage.setResizable(false);
+
+        Label lblTitle = new Label("MỜI KHÁCH HÀNG QUÉT MÃ QR");
+        lblTitle.getStyleClass().add("qr-title"); // ĐÃ SỬA: Chuyển sang dùng CSS Class
+
+        Label lblAmount = new Label(String.format("Số tiền: %,.0f VNĐ", executionAmount));
+        lblAmount.getStyleClass().add("qr-amount"); // ĐÃ SỬA: Chuyển sang dùng CSS Class
+
+        ImageView qrImageView = new ImageView();
+        qrImageView.setFitWidth(280);
+        qrImageView.setFitHeight(280);
+        qrImageView.setPreserveRatio(true);
+
+        try {
+            Image qrImage = new Image(qrUrl, true);
+            qrImageView.setImage(qrImage);
+        } catch (Exception e) {
+            System.err.println("❌ Lỗi tải mã QR: " + e.getMessage());
+        }
+
+        Button btnSuccess = new Button("Hoàn thành thanh toán");
+        btnSuccess.getStyleClass().add("btn-success"); // ĐÃ SỬA: Chuyển sang dùng CSS Class
+
+        btnSuccess.setOnAction(e -> {
+            popupStage.close();
+            sendOrderToServer("Chuyển khoản");
+        });
+
+        VBox layout = new VBox(12);
+        layout.setPadding(new Insets(15));
+        layout.setAlignment(Pos.CENTER);
+        layout.getStyleClass().add("qr-popup-layout"); // ĐÃ SỬA: Chuyển màu nền kem vào CSS Class
+        layout.getChildren().addAll(lblTitle, lblAmount, qrImageView, btnSuccess);
+
+        Scene scene = new Scene(layout);
+        popupStage.setScene(scene);
+        popupStage.showAndWait();
     }
 }

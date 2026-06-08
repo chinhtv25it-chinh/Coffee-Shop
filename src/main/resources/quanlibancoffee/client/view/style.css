@@ -39,6 +39,7 @@
     -fx-background-color: #E8F5E9; /* Màu xanh nhạt khi trống */
     -fx-border-color: #66BB6A;
 }
+
 /* Container chung */
 .container-card {
     -fx-background-color: white;
@@ -54,7 +55,6 @@
     -fx-border-width: 2;
     -fx-border-radius: 12;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 4);
-    -fx-transition: all 0.3s ease;
 }
 
 /* Bàn trống: Xanh đậm Forest Green */
@@ -99,4 +99,75 @@
 
 .btn-pay:hover {
     -fx-background-color: #3E2723;
+}
+
+
+/* =========================================================================
+   Các Class bổ sung dưới đây giúp làm sạch hoàn toàn Code Java của bạn
+   ========================================================================= */
+
+/* Nút Thêm (+) trong giỏ hàng */
+.btn-plus {
+    -fx-background-color: #2ECC71;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 2 6 2 6;
+}
+/* Nút Bớt (-) trong giỏ hàng */
+.btn-minus {
+    -fx-background-color: #F1C40F;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 2 8 2 8;
+}
+/* Nút Xóa hẳn món trong giỏ hàng */
+.btn-delete {
+    -fx-background-color: #E74C3C;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-padding: 2 5 2 5;
+}
+
+/* Cỡ chữ định dạng riêng cho Tên bàn và Trạng thái bàn */
+.table-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+.table-status {
+    -fx-font-size: 11px;
+}
+
+/* Định dạng chữ của món ăn/đồ uống trong danh sách thực đơn */
+.product-name {
+    -fx-font-weight: bold;
+    -fx-font-size: 11px;
+    -fx-text-fill: #4E342E;
+}
+.product-price {
+    -fx-text-fill: #E67E22;
+    -fx-font-weight: bold;
+    -fx-font-size: 11px;
+}
+
+/* Định dạng CSS cho giao diện Popup mã QR Banking */
+.qr-popup-layout {
+    -fx-background-color: #FDF5E6;
+}
+.qr-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4E342E;
+}
+.qr-amount {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E67E22;
+}
+.btn-success {
+    -fx-background-color: #2ECC71;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 7 15 7 15;
 }
