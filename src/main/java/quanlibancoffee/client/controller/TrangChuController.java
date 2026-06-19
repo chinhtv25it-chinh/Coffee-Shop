@@ -27,7 +27,7 @@ public class TrangChuController implements Initializable {
         colTime.setCellValueFactory(new PropertyValueFactory<>("time"));
         colMethod.setCellValueFactory(new PropertyValueFactory<>("method"));
 
-        // Định dạng tiền tệ cho cột Tổng tiền trực tiếp trên TableView giúp hiển thị đẹp mắt hơn
+        // Định dạng tiền tệ cho cột
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
         colTotal.setCellFactory(column -> new TableCell<OrderSummary, Double>() {
             @Override
@@ -85,7 +85,7 @@ public class TrangChuController implements Initializable {
 
     private void updateRecentTable(Connection con) throws SQLException {
         ObservableList<OrderSummary> list = FXCollections.observableArrayList();
-        // Lấy định dạng thời gian HH:mm cho đẹp mắt nếu muốn từ chuỗi thời gian
+        // Lấy định dạng thời gian HH:mm
         String sql = "SELECT TOP 10 CONVERT(VARCHAR(5), order_time, 108), total_amount, payment_method FROM orders " +
                 "WHERE order_date = CONVERT(DATE, GETDATE()) ORDER BY id DESC";
 

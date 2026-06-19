@@ -17,7 +17,7 @@ public class MainServer {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("\n🌐 [SERVER] Có thiết bị kết nối mới từ IP: " + clientSocket.getRemoteSocketAddress());
 
-                // Kích hoạt ĐA LUỒNG (Thread) xử lý riêng cho client này
+                // Kích hoạt ĐA LUỒNG (Thread) xử lý riêng cho client
                 ClientHandler clientHandler = new ClientHandler(clientSocket);
                 Thread thread = new Thread(clientHandler);
                 thread.start();

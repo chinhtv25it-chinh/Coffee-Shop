@@ -39,7 +39,7 @@ public class BanHangController implements Initializable {
     @FXML private TableColumn<Product, String> colOrderName;
     @FXML private TableColumn<Product, Double> colOrderPrice;
 
-    // Thêm cột hành động tăng giảm xóa trong giỏ hàng cho đẹp và chuyên nghiệp
+    // Hành động tăng giảm xóa trong giỏ hàng
     private TableColumn<Product, Void> colAction;
 
     @FXML private Label lblTotal;
@@ -47,7 +47,7 @@ public class BanHangController implements Initializable {
     @FXML private FlowPane flowTables;
     @FXML private Label lblSelectedTable;
 
-    // Thêm các điều hướng phương thức thanh toán
+    // Các điều hướng phương thức thanh toán
     @FXML
     private RadioButton radTienMat;
     @FXML
@@ -68,7 +68,6 @@ public class BanHangController implements Initializable {
         initActionColumn();
         tableOrder.setItems(orderItems);
 
-        // ĐÃ SỬA: Chỉ gộp nhóm ToggleGroup, TUYỆT ĐỐI không dùng 'new RadioButton'
         paymentGroup = new ToggleGroup();
         if (radTienMat != null && radChuyenKhoan != null) {
             radTienMat.setToggleGroup(paymentGroup);
@@ -87,7 +86,7 @@ public class BanHangController implements Initializable {
         });
     }
 
-    // Tạo cột tính năng Thêm/Bớt/Xóa món trực tiếp trên dòng TableView cho đẹp
+    // Tạo cột tính năng Thêm/Bớt/Xóa
     private void initActionColumn() {
         colAction = new TableColumn<>("Hành động");
         colAction.setPrefWidth(110);
@@ -102,7 +101,6 @@ public class BanHangController implements Initializable {
                     private final HBox pane = new HBox(4, btnPlus, btnMinus, btnDelete);
 
                     {
-                        // ĐÃ SỬA: Gọi class CSS thay vì dùng .setStyle() inline
                         btnPlus.getStyleClass().add("btn-plus");
                         btnMinus.getStyleClass().add("btn-minus");
                         btnDelete.getStyleClass().add("btn-delete");

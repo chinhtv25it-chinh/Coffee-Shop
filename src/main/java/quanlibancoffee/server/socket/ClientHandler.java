@@ -99,9 +99,6 @@ public class ClientHandler implements Runnable {
                         break;
                     }
 
-                    /* =========================================================================
-                       🆕 THÊM MỚI: CASE XỬ LÝ ĐĂNG KÝ TÀI KHOẢN QUA SOCKET (Đúng chuẩn cấu trúc hệ thống)
-                       ========================================================================= */
                     case "REGISTER":
                         // Nhận chuỗi từ Client: REGISTER;username;email;password
                         if (tokens.length >= 4) {
@@ -109,7 +106,7 @@ public class ClientHandler implements Runnable {
                             String email = tokens[2];
                             String rawPassword = tokens[3];
 
-                            // 💥 TIÊU CHÍ BẮT BUỘC: Mã hóa băm SHA-256 bảo mật mật khẩu trước khi lưu
+                            //Mã hóa băm SHA-256 bảo mật mật khẩu trước khi lưu
                             String hashedPassword = quanlibancoffee.server.utils.PasswordUtil.hashPassword(rawPassword);
 
                             String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";

@@ -123,7 +123,7 @@ public class LoginController {
 
             Scene scene = new Scene(root);
 
-            // Tự động kiểm tra nạp file CSS trang trí nếu có tồn tại
+            // Tự động kiểm tra nạp file CSS
             try {
                 scene.getStylesheets().add(getClass().getResource("/quanlibancoffee/client/view/style.css").toExternalForm());
             } catch (Exception cssEx) {
