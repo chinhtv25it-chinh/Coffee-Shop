@@ -98,6 +98,10 @@ src/main/java/quanlibancoffee/
 ---
 
 ## 🔑 7. Tài Khoản Kiểm Thử Hệ Thống
-Hệ thống thực hiện phân quyền hạn thao tác dữ liệu và hiển thị thanh menu chức năng dựa trên vai trò của tài khoản ngay sau khi đăng nhập thành công:
-* **Admin:** chinh, 123456. Được phép truy cập toàn bộ hệ thống: quản lý món, cập nhật sơ đồ bàn, cấp tài khoản nhân viên và xem thống kê doanh thu.
-* **Nhanvien:** tranchinh, 1234567. Chỉ được thao tác nghiệp vụ tại quầy: xem sơ đồ bàn, gọi món, thay đổi trạng thái bàn và in hóa đơn bán hàng cho khách.
+
+Hệ thống thực hiện phân quyền hạn thao tác dữ liệu và tự động ẩn/hiển thị các thanh menu chức năng dựa trên vai trò của tài khoản ngay sau khi đăng nhập thành công:
+
+| Vai trò (Role) | Tài khoản (Username) | Mật khẩu (Password) | Phạm vi quyền hạn dữ liệu |
+| :---: | :--- | :--- | :--- |
+| 🛡️ **Admin** | `chinh` | `123456` | **Toàn quyền hệ thống:** Cho phép quản lý danh mục món, cập nhật sơ đồ bàn, cấp phát tài khoản nhân viên mới và xem báo cáo thống kê doanh thu. |
+| 💼 **Nhanvien** | `tranchinh` | `1234567` | **N nghiệp vụ tại quầy:** Chỉ được phép xem sơ đồ bàn, thao tác gọi món (order), thay đổi trạng thái bàn và xuất/in hóa đơn bán hàng cho khách. |
