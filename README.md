@@ -1,7 +1,7 @@
 <div align="center">
 
-# ☕ COFFEE SHOP POS SYSTEM
-### 🚀 Hệ Thống Quản Lý & Bán Hàng Cà Phê Mạng Đa Luồng (Client - Server)
+# ☕ COFFEE SHOP
+### 🚀 Hệ Thống Quản Lý & Bán Hàng Cà Phê
 
 Thực hiện theo kiến trúc phân lớp chuẩn **MVC (Client)** và **3-Tier / DAO (Server)** giao tiếp qua **TCP/IP Socket**.
 
@@ -37,7 +37,7 @@ Thực hiện theo kiến trúc phân lớp chuẩn **MVC (Client)** và **3-Tie
 
 ---
 
-## ✨ 3. Các Chức N Kahn Đã Hoàn Thiện
+## ✨ 3. Các Chức Năng Đã Hoàn Thiện
 
 ### 🛒 Phân Hệ Nhân Viên (Bán Hàng)
 * **Xác thực hệ thống:** Đăng nhập, bảo mật phiên làm việc cá nhân thông qua lớp `UserSession`.
@@ -71,31 +71,37 @@ src/main/java/quanlibancoffee/
 │
 └── 🔄 shared/                      # TÀI NGUYÊN DÙNG CHUNG
     └── model/                   # Định nghĩa các đối tượng thực thể (Product, Order,...)
+```
 
 ---
 
-💾 5. Hướng Dẫn Cài Đặt Môi Trường
-🗄️ Khởi tạo Cơ sở dữ liệu: Mở phần mềm Microsoft SQL Server Management Studio (SSMS), chạy lệnh SQL CREATE DATABASE quanlibancoffee; rồi execute tệp script .sql đi kèm dự án để tự động tạo cấu trúc bảng hệ thống.
+## 💾 5. Hướng Dẫn Cài Đặt Môi Trường
 
-📝 Cấu hình kết nối hệ thống: Tìm đến tệp Database.java theo đường dẫn src/main/java/quanlibancoffee/server/utils/Database.java. Tiến hành thay đổi thông số tài khoản và mật khẩu SQL Server của máy bạn:
-// Cấu hình URL chuẩn kết nối tới Microsoft SQL Server (Port mặc định: 1433)
-private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=quanlibancoffee;encrypt=true;trustServerCertificate=true;";
-private static final String USER = "sa";             // Tài khoản sa của SQL Server
-private static final String PASSWORD = "YOUR_PASSWORD"; // Mật khẩu sa của bạn
+* 🗄️ **Khởi tạo Cơ sở dữ liệu:** Mở phần mềm Microsoft SQL Server Management Studio (SSMS), chạy lệnh SQL `CREATE DATABASE quanlibancoffee;` rồi execute tệp script `.sql` đi kèm dự án để tự động tạo cấu trúc bảng hệ thống.
+* 📝 **Cấu hình kết nối hệ thống:** Tìm đến tệp `Database.java` theo đường dẫn `src/main/java/quanlibancoffee/server/utils/Database.java`. Tiến hành thay đổi thông số tài khoản và mật khẩu SQL Server của máy bạn:
+  ```java
+  // Cấu hình URL chuẩn kết nối tới Microsoft SQL Server (Port mặc định: 1433)
+  private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=quanlibancoffee;encrypt=true;trustServerCertificate=true;";
+  private static final String USER = "sa";             // Tài khoản sa của SQL Server
+  private static final String PASSWORD = "YOUR_PASSWORD"; // Mật khẩu sa của bạn
 
----
-
-💻 6. Quy Trình Khởi Chạy Ứng Dụng
-⚠️ Lưu ý bắt buộc: Vì hệ thống chạy theo mô hình Socket kết nối mạng, bạn phải kích hoạt Server trước, sau đó mới khởi động Client. Nếu chạy Client trước, ứng dụng sẽ lập tức crash do không tìm thấy cổng mạng kết nối.
-
-📡 Bước 1 - Chạy Server trung tâm: Tìm đến lớp MainServer.java theo đường dẫn src/main/java/quanlibancoffee/server/socket/MainServer.java, click chuột phải và chọn Run 'MainServer.main()'. Server báo log đang lắng nghe kết nối là thành công.
-
-📱 Bước 2 - Chạy Client (Giao diện): Tìm đến lớp CoffeeApp.java theo đường dẫn src/main/java/quanlibancoffee/client/CoffeeApp.java, click chuột phải và chọn Run 'CoffeeApp.main()'. Cửa sổ đăng nhập JavaFX sẽ tự động hiển thị.
 
 ---
 
-🔑 7. Tài Khoản Kiểm Thử Hệ Thống
-Hệ thống thực hiện phân quyền hạn thao tác dữ liệu và hiển thị thanh menu chức năng dựa trên vai trò của tài khoản ngay sau khi đăng nhập thành công:
+## 💻 6. Quy Trình Khởi Chạy Ứng Dụng
+* ⚠️ **Lưu ý bắt buộc:** Vì hệ thống chạy theo mô hình Socket kết nối mạng, bạn phải kích hoạt Server trước, sau đó mới khởi động Client. Nếu chạy Client trước, ứng dụng sẽ lập tức crash do không tìm thấy cổng mạng kết nối.
+
+* 📡 **Bước 1 - Chạy Server trung tâm**: Tìm đến lớp MainServer.java theo đường dẫn src/main/java/quanlibancoffee/server/socket/MainServer.java, click chuột phải và chọn Run 'MainServer.main()'. Server báo log đang lắng nghe kết nối là thành công.
+
+* 📱 **Bước 2 - Chạy Client (Giao diện):** Tìm đến lớp CoffeeApp.java theo đường dẫn src/main/java/quanlibancoffee/client/CoffeeApp.java, click chuột phải và chọn Run 'CoffeeApp.main()'. Cửa sổ đăng nhập JavaFX sẽ tự động hiển thị.
+
+---
+
+## 🔑 7. Tài Khoản Kiểm Thử Hệ Thống
+Hệ thống thực hiện phân quyền hạn thao tác dữ liệu và hiển thị thanh menu chức năng dựa trên vai trò của tài khoản ngay sau khi đăng nhập thành công:Tài khoản (Username),Mật khẩu (Password),Phân quyền (Role),Phạm vi quyền hạn dữ liệu
+chinh,123456,Quản trị viên,"Được phép truy cập toàn bộ hệ thống: quản lý món, cập nhật sơ đồ bàn, cấp tài khoản nhân viên và xem thống kê doanh thu."
+tranchinh,1234567,Nhân viên quầy,"Chỉ được thao tác nghiệp vụ tại quầy: xem sơ đồ bàn, gọi món, thay đổi trạng thái bàn và in hóa đơn bán hàng cho khách."
+
 Tài khoản (Username),Mật khẩu (Password),Phân quyền (Role),Phạm vi quyền hạn dữ liệu
 chinh,123456,Quản trị viên,"Được phép truy cập toàn bộ hệ thống: quản lý món, cập nhật sơ đồ bàn, cấp tài khoản nhân viên và xem thống kê doanh thu."
 tranchinh,1234567,Nhân viên quầy,"Chỉ được thao tác nghiệp vụ tại quầy: xem sơ đồ bàn, gọi món, thay đổi trạng thái bàn và in hóa đơn bán hàng cho khách."
