@@ -11,7 +11,7 @@
         <StackPane prefWidth="430">
             <ImageView fitWidth="500" fitHeight="600" preserveRatio="false">
                 <image>
-                    <Image url="@../image/coffee.jpg" />
+                    <Image url="@/quanlibancoffee/client/image/coffee.jpg" />
                 </image>
             </ImageView>
         </StackPane>

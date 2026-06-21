@@ -13,15 +13,23 @@ public class CoffeeApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         // 1. Kích hoạt kết nối socket mạng sang server trước khi hiển thị màn hình
-        ClientService.connect();
+        // Bắt lỗi để ứng dụng không bị crash nếu server chưa chạy
+        try {
+            ClientService.connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/quanlibancoffee/client/view/login.fxml")
         );
         Scene scene = new Scene(loader.load());
-        scene.getStylesheets().add(
-                Objects.requireNonNull(getClass().getResource("/quanlibancoffee/client/view/style.css")).toExternalForm()
-        );
+
+        if (getClass().getResource("/quanlibancoffee/client/view/style.css") != null) {
+            scene.getStylesheets().add(
+                    Objects.requireNonNull(getClass().getResource("/quanlibancoffee/client/view/style.css")).toExternalForm()
+            );
+        }
 
         stage.setTitle("Hệ Thống Quản Lý Cà Phê");
         stage.setScene(scene);
