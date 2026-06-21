@@ -7,9 +7,9 @@ Thực hiện theo kiến trúc phân lớp chuẩn **MVC (Client)** và **3-Tie
 
 ---
 
-[![Java Version](https://img.shields.io/badge/Java-17%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
-[![JavaFX](https://img.shields.io/badge/JavaFX-11%2B-0073B7?style=for-the-badge&logo=java&logoColor=white)](https://openjfx.io/)
-[![SQL Server](https://img.shields.io/badge/SQL%20Server-2019%2F2022-CC292B?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)](https://www.microsoft.com/sql-server)
+[![Java Version](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+[![JavaFX](https://img.shields.io/badge/JavaFX-21-0073B7?style=for-the-badge&logo=java&logoColor=white)](https://openjfx.io/)
+[![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-CC292B?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)](https://www.microsoft.com/sql-server)
 [![Maven](https://img.shields.io/badge/Maven-3.x-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)](https://maven.apache.org/)
 [![Socket](https://img.shields.io/badge/Network-TCP%2FIP%20Socket-brightgreen?style=for-the-badge)]()
 
@@ -19,9 +19,7 @@ Thực hiện theo kiến trúc phân lớp chuẩn **MVC (Client)** và **3-Tie
 
 ## 📌 1. Tổng Quan Kiến Trúc Dự Án
 
-Dự án áp dụng mô hình phân tách thư mục cùng cấp hiện đại nhằm tối ưu hóa khả năng bảo trì và nâng cấp hệ thống:
-
-* 🏛️ **Client-Side:** Sử dụng JavaFX để dựng giao diện tĩnh qua FXML. Code xử lý được chia tách làm 3 gói ngang hàng: `controller` (Bắt sự kiện UI), `service` (Xử lý logic và truyền tin Socket), và `view` (Giao diện).
+* 🏛️ **Client-Side:** Sử dụng JavaFX 21 để dựng giao diện tĩnh qua FXML. Code xử lý được chia tách làm 3 gói ngang hàng: `controller` (Bắt sự kiện UI), `service` (Xử lý logic và truyền tin Socket), và `view` (Giao diện).
 * 🌐 **Server-Side:** Sử dụng kiến trúc đa luồng (`Multi-threading`) để chấp nhận nhiều kết nối đồng thời qua `ClientHandler`. Tầng `dao` đảm nhận nhiệm vụ truy vấn cơ sở dữ liệu SQL Server tách biệt hoàn toàn.
 
 ---
@@ -30,8 +28,8 @@ Dự án áp dụng mô hình phân tách thư mục cùng cấp hiện đại n
 
 | Thành phần | Công nghệ / Thư viện | Vai trò trong hệ thống |
 | :--- | :--- | :--- |
-| **Core** | `Java SE 17` | Ngôn ngữ lập trình chính của toàn bộ hệ thống. |
-| **UI Framework** | `JavaFX (Controls, FXML)` | Thiết kế giao diện người dùng mượt mà, trực quan. |
+| **Core** | `Java SE 21` | Ngôn ngữ lập trình chính của toàn bộ hệ thống (LTS mới tối ưu hiệu năng). |
+| **UI Framework** | `JavaFX 21` | Thiết kế giao diện người dùng mượt mà, trực quan và hiện đại. |
 | **Database** | `Microsoft JDBC Driver for SQL Server` | Thư viện kết nối hệ quản trị cơ sở dữ liệu SQL Server. |
 | **Network** | `Java Custom Socket` | Truyền nhận dữ liệu dạng chuỗi/đối tượng qua giao thức TCP/IP. |
 | **Security** | `SHA-256 / Utils` | Mã hóa một chiều mật khẩu người dùng trước khi lưu xuống DB. |
@@ -39,7 +37,7 @@ Dự án áp dụng mô hình phân tách thư mục cùng cấp hiện đại n
 
 ---
 
-## ✨ 3. Các Chức Năng Đã Hoàn Thiện
+## ✨ 3. Các Chức N Kahn Đã Hoàn Thiện
 
 ### 🛒 Phân Hệ Nhân Viên (Bán Hàng)
 * **Xác thực hệ thống:** Đăng nhập, bảo mật phiên làm việc cá nhân thông qua lớp `UserSession`.
@@ -73,3 +71,31 @@ src/main/java/quanlibancoffee/
 │
 └── 🔄 shared/                      # TÀI NGUYÊN DÙNG CHUNG
     └── model/                   # Định nghĩa các đối tượng thực thể (Product, Order,...)
+
+---
+
+💾 5. Hướng Dẫn Cài Đặt Môi Trường
+🗄️ Khởi tạo Cơ sở dữ liệu: Mở phần mềm Microsoft SQL Server Management Studio (SSMS), chạy lệnh SQL CREATE DATABASE quanlibancoffee; rồi execute tệp script .sql đi kèm dự án để tự động tạo cấu trúc bảng hệ thống.
+
+📝 Cấu hình kết nối hệ thống: Tìm đến tệp Database.java theo đường dẫn src/main/java/quanlibancoffee/server/utils/Database.java. Tiến hành thay đổi thông số tài khoản và mật khẩu SQL Server của máy bạn:
+// Cấu hình URL chuẩn kết nối tới Microsoft SQL Server (Port mặc định: 1433)
+private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=quanlibancoffee;encrypt=true;trustServerCertificate=true;";
+private static final String USER = "sa";             // Tài khoản sa của SQL Server
+private static final String PASSWORD = "YOUR_PASSWORD"; // Mật khẩu sa của bạn
+
+---
+
+💻 6. Quy Trình Khởi Chạy Ứng Dụng
+⚠️ Lưu ý bắt buộc: Vì hệ thống chạy theo mô hình Socket kết nối mạng, bạn phải kích hoạt Server trước, sau đó mới khởi động Client. Nếu chạy Client trước, ứng dụng sẽ lập tức crash do không tìm thấy cổng mạng kết nối.
+
+📡 Bước 1 - Chạy Server trung tâm: Tìm đến lớp MainServer.java theo đường dẫn src/main/java/quanlibancoffee/server/socket/MainServer.java, click chuột phải và chọn Run 'MainServer.main()'. Server báo log đang lắng nghe kết nối là thành công.
+
+📱 Bước 2 - Chạy Client (Giao diện): Tìm đến lớp CoffeeApp.java theo đường dẫn src/main/java/quanlibancoffee/client/CoffeeApp.java, click chuột phải và chọn Run 'CoffeeApp.main()'. Cửa sổ đăng nhập JavaFX sẽ tự động hiển thị.
+
+---
+
+🔑 7. Tài Khoản Kiểm Thử Hệ Thống
+Hệ thống thực hiện phân quyền hạn thao tác dữ liệu và hiển thị thanh menu chức năng dựa trên vai trò của tài khoản ngay sau khi đăng nhập thành công:
+Tài khoản (Username),Mật khẩu (Password),Phân quyền (Role),Phạm vi quyền hạn dữ liệu
+chinh,123456,Quản trị viên,"Được phép truy cập toàn bộ hệ thống: quản lý món, cập nhật sơ đồ bàn, cấp tài khoản nhân viên và xem thống kê doanh thu."
+tranchinh,1234567,Nhân viên quầy,"Chỉ được thao tác nghiệp vụ tại quầy: xem sơ đồ bàn, gọi món, thay đổi trạng thái bàn và in hóa đơn bán hàng cho khách."
