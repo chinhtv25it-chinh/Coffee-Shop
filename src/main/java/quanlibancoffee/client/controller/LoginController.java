@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
-// Thêm thư viện phục vụ mã hóa mật khẩu SHA-256
+// Thư viện mã hóa mật khẩu SHA-256
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
@@ -33,16 +33,16 @@ public class LoginController {
         }
 
         try {
-            // 1. [BẢO MẬT] Mã hóa mật khẩu người dùng vừa nhập sang chuỗi SHA-256 trước khi gửi đi
+            // 1. Mã hóa mật khẩu người dùng vừa nhập sang chuỗi SHA-256
             String hashedPass = hashSHA256(password);
 
-            // 2. Đóng gói dữ liệu truyền qua Socket theo định dạng chuỗi (Mật khẩu gửi đi đã được băm an toàn)
+            // 2. Đóng gói dữ liệu truyền qua Socket theo định dạng chuỗi
             String requestStr = "LOGIN;" + username + ";" + hashedPass;
 
             // 3. Bắn chuỗi dữ liệu sang Server thông qua tầng Service
             String responseStr = quanlibancoffee.client.service.ClientService.sendRequest(requestStr);
 
-            // 4. Xử lý phản hồi từ Server trả về (Định dạng chuẩn từ Server: LOGIN_SUCCESS;Admin hoặc LOGIN_SUCCESS;User)
+            // 4. Xử lý phản hồi từ Server trả về (định dạng chuẩn từ Server: LOGIN_SUCCESS;Admin hoặc LOGIN_SUCCESS;User)
             if (responseStr != null && responseStr.startsWith("LOGIN_SUCCESS")) {
                 String[] tokens = responseStr.split(";");
 

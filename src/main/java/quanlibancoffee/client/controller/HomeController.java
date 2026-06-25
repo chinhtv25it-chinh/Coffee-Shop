@@ -84,7 +84,7 @@ public class HomeController implements Initializable {
     @FXML
     void logout() {
         try {
-            // 3. [BẢO MẬT] Xóa sạch thông tin tài khoản và quyền trong bộ nhớ tạm khi đăng xuất
+            // 3. Xóa sạch thông tin tài khoản và quyền trong bộ nhớ tạm khi đăng xuất
             UserSession.cleanSession();
             System.out.println("♻ [ĐĂNG XUẤT] Đã xóa phiên làm việc an toàn.");
 

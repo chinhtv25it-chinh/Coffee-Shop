@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 
 public class RegisterController {
 
@@ -36,6 +38,9 @@ public class RegisterController {
             lblMessage.setText("❌ Email không đúng định dạng!");
             return;
         }
+
+        // 3. Mã hóa mật khẩu người dùng vừa nhập sang chuỗi SHA-256
+        String hashedPass = hashSHA256(password);
 
         // 3. Đóng gói chuỗi dữ liệu gửi qua Socket Server theo định dạng: REGISTER;username;email;password
         String requestStr = "REGISTER;" + username + ";" + email + ";" + password;
@@ -84,6 +89,24 @@ public class RegisterController {
         } catch (Exception e) {
             System.out.println("❌ Lỗi không quay lại được trang đăng nhập!");
             e.printStackTrace();
+        }
+    }
+    /**
+     * Hàm băm bảo mật SHA-256 đồng bộ với hệ thống cơ sở dữ liệu
+     */
+    private String hashSHA256(String base) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(base.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (Exception ex) {
+            return base; // Trả về chuỗi gốc phòng trường hợp thuật toán mã hóa lỗi
         }
     }
 }
